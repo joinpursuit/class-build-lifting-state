@@ -7,6 +7,10 @@ function App() {
   const [dogs, setDogs] = useState(dogsData);
   const [showNewDogForm, setNewDogForm] = useState(false);
 
+  function handleAddDog(dog) {
+    setDogs([dog, ...dogs]);
+  }
+
   function removeDog(dogID) {
     const filteredDogArray = dogs.filter((dog) => dog.id !== dogID);
     setDogs(filteredDogArray);
@@ -32,12 +36,23 @@ function App() {
           <button onClick={toggleNewDogForm}>
             {showNewDogForm ? "hide form" : "Add a new dog"}
           </button>
-          {showNewDogForm ? <NewDogForm /> : null}
+          {showNewDogForm ? (
+            <NewDogForm
+              handleAddDog={handleAddDog}
+              toggleNewDogForm={toggleNewDogForm}
+            />
+          ) : null}
         </div>
         <div>
           <ul>
             {dogs.map((dog) => {
-              return <DogListItem dog={dog} />;
+              return (
+                <DogListItem
+                  dog={dog}
+                  updateDogAttendance={updateDogAttendance}
+                  removeDog={removeDog}
+                />
+              );
             })}
           </ul>
         </div>
