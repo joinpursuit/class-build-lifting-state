@@ -48,6 +48,7 @@ function App() {
             {dogs.map((dog) => {
               return (
                 <DogListItem
+                  key={dog.id}
                   dog={dog}
                   updateDogAttendance={updateDogAttendance}
                   removeDog={removeDog}
